@@ -1,2 +1,6 @@
 *.cs
+*.txt
 __pycache__
+
+
+!/CodeGenerators/Sample_ClassDef.txt
