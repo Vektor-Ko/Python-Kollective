@@ -1,10 +1,15 @@
-## First Character(s) are used to identify what the following arguments will be used for 
-## for example F=Field, P=Property, M=Method, PM=Private Method, etc... You get the picture.
+####################################################################################
+## First Character(s) are used to identify what the following arguments will be used 
+## for example F=Field, P=Property, M=Method, PM=Private Method, etc... 
+## You get the picture.
 ##
 ## Second Character(s) are used to identify the object type you are dealing with.
-## For example: s=string, b=bool, d=double, l=long, L=List(language specific), etc... Now its making sense!
+## For example: s=string, b=bool, d=double, l=long, L=List(language specific), etc... 
+## Now its making sense!
 ##
-## Last Character(s) usually a string are used to identify the variable,method name you are creating.
+## Last Character(s) usually a string are used to identify the variable,method name 
+## you are creating.
+
 ## Now lets add it all together in some examples down below:
 ## For example: 
 ##  - F s Name = private string Name;
@@ -13,13 +18,37 @@
 ##  - PM v PrivateCalc = private void Calculate(){}
 ##  You get the picture....
 ##
-## Oh also N = Name of the class... hence why it only has the name property and no type assigned to it. This should be at the top always..
-## it only makes sense..
+## Oh also N = Name of the class... hence why it only has the name property 
+## and no type assigned to it. This should be at the top always...
+##
 ## And E = End of class definition...this lets the scripts know they can stop. 
 ##
-## The scripts only expect this type of layout, its pretty simple right now but feel free to enhance.
+## The scripts only expect this type of layout, its pretty simple right now but 
+## feel free to enhance.
+##
+####################################################################################
+
+DIAGRAM:
+====================================================================================
+|  Generation Type |   object Type   |     Name      |          Result              |
+====================================================================================|
+|       N          |                 |  SampleClass  | public class SampleClass     |
+|       F          |       s         |     Name      | private string Name;         |
+|       P          |       d         |     Offset    | public double Offset{get;set;|
+|       M          |       v         |   SetOffset   | public void SetOffset(){}    |
+|       PM         |       v         |   SetOffset   | private void SetOffset(){}   |
+|       E          |                 |               | signifiers the end           |
+====================================================================================
+
+#####################################################################################
+
+Sample text:
 
 N SampleClass
-F s Name  # , s = string. ex: private string Name
+F s Name
 P d Offset
+M v SetOffset
+PM v SetOffset
 E
+
+#####################################################################################
