@@ -9,35 +9,39 @@ gutils = GeneratorUtilities
 
 
 try:
-    opts, args = getopt.getopt(all_args, 'f:t:')
-    print(opts)
+    opts, args = getopt.getopt(all_args, "f:t:", ["viewmodel ="])
 
-    if len(opts) != 2:
-        print('usage: CreateMVVM.py -f <filepath> -t <filetype>')
-    else:
-        filePath = opts[0][1]
-        fileType = opts[1][1]
+    if len(opts) < 2:
+        print('usage: ClassGenerator.py -f <required:filepath> -t <required:filetype> -vm <boolean>')
 
-        ClassDef = ClassDefParser.GetClassDefFromFile(filePath)
-        file = open("{}{}".format(ClassDef['Name'].replace('\n',''), fileType), 'w')
+    for opt, arg in opts:
+        if opt in ['-f']:
+            filePath = arg
+        elif opt in ['-t']:
+            fileType = arg
+        elif opt in ['--viewmodel']:
+            vm = arg
 
-        gutils.WriteDefaultUsings(fileType,file)
-        gutils.WriteClassName(fileType,file, ClassDef['Name'])
+    ClassDef = ClassDefParser.GetClassDefFromFile(filePath)
+    file = open("{}{}".format(ClassDef['Name'].replace('\n',''), fileType), 'w')
 
-        if len(ClassDef['Fields']) > 0:
-            gutils.WriteFields(fileType,file, ClassDef['Fields'])
+    gutils.WriteDefaultUsings(fileType,file)
+    gutils.WriteClassName(fileType,file, ClassDef['Name'])
 
-        gutils.WriteConstructor(fileType,file, ClassDef['Name'])
+    if len(ClassDef['Fields']) > 0:
+        gutils.WriteFields(fileType,file, ClassDef['Fields'])
 
-        if len(ClassDef['Properties']) > 0:
-            gutils.WriteProperties(fileType, file, ClassDef['Properties'])
-            
-        if len(ClassDef['Private Methods']) > 0:
-            gutils.WritePrivateMethods(fileType,file, ClassDef['Private Methods'])
+    gutils.WriteConstructor(fileType,file, ClassDef['Name'])
 
-        if len(ClassDef['Methods']) > 0:
-            gutils.WriteMethods(fileType,file, ClassDef['Methods'])
-        file.write('}')
+    if len(ClassDef['Properties']) > 0:
+        gutils.WriteProperties(fileType, file, ClassDef['Properties'])
+        
+    if len(ClassDef['Private Methods']) > 0:
+        gutils.WritePrivateMethods(fileType,file, ClassDef['Private Methods'])
+
+    if len(ClassDef['Methods']) > 0:
+        gutils.WriteMethods(fileType,file, ClassDef['Methods'])
+    file.write('}')
 
 except getopt.GetoptError:
     print("Error")

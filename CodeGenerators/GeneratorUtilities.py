@@ -26,8 +26,6 @@ def WriteDefaultUsings(ft, file):
 def WriteClassName(ft, f, n):
     if ft == '.cs':
         Write_CS_ClassName(f,n)
-    elif ft == '.cpp':
-        print('todo')
 
 def WriteFields(ft, f, fields):
     if ft == '.cs':
@@ -48,8 +46,6 @@ def WritePrivateMethods(ft, file, methods):
 def WriteMethods(ft, file, methods):
     if ft == '.cs':
         Write_CS_Methods(file, methods)
-    elif ft == '.cpp':
-        print("ToDo")
 
 
 
@@ -72,7 +68,6 @@ def Write_CS_Fields(file, fields):
 
 def Write_CS_Constructor(file, name):
     file.write('\n\t#region Ctor\n')
-    print(name)
     file.write('\tpublic {}()'.format(name.replace('\n', '')))
     file.write('{\n')
     file.write('\t}')
@@ -85,11 +80,9 @@ def Write_CS_Properties(file, properties):
         pType = prop[0]
         pName = prop[1]
         if len(prop) == 3:
-            print(len(prop))
             pSet = prop[2]
             file.write('\tpublic {} {} {{get; private set;}}\n'.format(pType, pName))
         elif len(prop) == 2:
-            print(len(prop))
             file.write('\tpublic {} {} {{get; set;}}\n'.format(pType, pName))
     file.write('\n\t#endregion\n')
 
