@@ -12,7 +12,7 @@ try:
     opts, args = getopt.getopt(all_args, "f:t:", ["viewmodel ="])
 
     if len(opts) < 2:
-        print('usage: ClassGenerator.py -f <required:filepath> -t <required:filetype> -vm <boolean>')
+      print('usage: ClassGenerator.py -f <required:filepath> -t <required:filetype> -vm <boolean>')
 
     for opt, arg in opts:
         if opt in ['-f']:
