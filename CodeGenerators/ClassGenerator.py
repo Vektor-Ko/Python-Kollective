@@ -54,10 +54,10 @@ try:
         if len(ClassDef['Fields']) > 0:
             gutils.WriteFields(classFileType,ViewModelFile, ClassDef['Fields'])
 
-        gutils.WriteConstructor(classFileType,ViewModelFile, ClassDef['Name'])
+        gutils.WriteVMConstructor(classFileType,ViewModelFile, ClassDef['Name'])
 
         if len(ClassDef['Properties']) > 0:
-            gutils.WriteProperties(classFileType, ViewModelFile, ClassDef['Properties'])
+            gutils.WriteBindingProperties(classFileType, ViewModelFile, ClassDef['Properties'])
             
         if len(ClassDef['Private Methods']) > 0:
             gutils.WritePrivateMethods(classFileType,ViewModelFile, ClassDef['Private Methods'])
