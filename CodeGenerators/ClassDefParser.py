@@ -1,5 +1,8 @@
 #!/usr/bin/env pytho
 import GeneratorUtilities
+import TextUtilities
+
+tu = TextUtilities
 
 ClassDict = {}
 # Initialize Name of the class
@@ -41,8 +44,8 @@ def GetClassDefFromFile(filepath):
 
             # Property with Original value backing
             elif key == 'OP':
-                t = gu.TNL(gu.GetType(values[1]))
-                n = gu.TNL(values[2])
+                t = tu.TNL(tu.GetType(values[1]))
+                n = tu.TNL(values[2])
                 origN = '_Original_{}'.format(n)
                 ClassDict['Fields'].append([t,origN])
                 ClassDict['Properties'].append([t,n,'true'])
@@ -50,8 +53,8 @@ def GetClassDefFromFile(filepath):
             # Private set Property with Original value backing
             # This will auto generate Public set method for this property
             elif key == 'OPP':
-                t = gu.TNL(gu.GetType(values[1]))
-                n = gu.TNL(values[2])
+                t = tu.TNL(tu.GetType(values[1]))
+                n = tu.TNL(values[2])
                 origN = '_Original_{}'.format(n)
                 setN = 'Set{}'.format(n)
                 ClassDict['Fields'].append([t,origN])
@@ -60,26 +63,26 @@ def GetClassDefFromFile(filepath):
 
             # Field reached
             elif key == 'F':
-                t = gu.TNL(gu.GetType(values[1]))
-                n = gu.TNL(values[2])
+                t = tu.TNL(tu.GetType(values[1]))
+                n = tu.TNL(values[2])
                 ClassDict['Fields'].append([t,n])
 
             # Property reached
             elif key == 'P':
-                pT = gu.TNL(gu.GetType(values[1]))
-                pN = gu.TNL(values[2])
+                pT = tu.TNL(tu.GetType(values[1]))
+                pN = tu.TNL(values[2])
                 ClassDict['Properties'].append([pT,pN])
 
             # Private Method reached
             elif key == 'PM':
-                rt = gu.TNL(gu.GetType(values[1]))
-                n = gu.TNL(values[2])
+                rt = tu.TNL(tu.GetType(values[1]))
+                n = tu.TNL(values[2])
                 ClassDict['Private Methods'].append([rt, n])
 
             # Public Method reached
             elif key == 'M':
-                rt = gu.TNL(gu.GetType(values[1]))
-                n = gu.TNL(values[2])
+                rt = tu.TNL(tu.GetType(values[1]))
+                n = tu.TNL(values[2])
                 ClassDict['Methods'].append([rt, n])
     return ClassDict
             
