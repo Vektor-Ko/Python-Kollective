@@ -10,6 +10,7 @@ gutils = GeneratorUtilities
 
 try:
     opts, args = getopt.getopt(all_args, "f:t:", ["viewmodel ="])
+    print(opts)
 
     if len(opts) < 2:
       print('usage: ClassGenerator.py -f <required:filepath> -t <required:filetype> -vm <boolean>')
@@ -18,30 +19,54 @@ try:
         if opt in ['-f']:
             filePath = arg
         elif opt in ['-t']:
-            fileType = arg
-        elif opt in ['--viewmodel']:
+            classFileType = arg
+        elif opt in ['--viewmodel ']:
             vm = arg
 
     ClassDef = ClassDefParser.GetClassDefFromFile(filePath)
-    file = open("{}{}".format(ClassDef['Name'].replace('\n',''), fileType), 'w')
+    classFile = open("{}{}".format(ClassDef['Name'].replace('\n',''), classFileType), 'w')
 
-    gutils.WriteDefaultUsings(fileType,file)
-    gutils.WriteClassName(fileType,file, ClassDef['Name'])
-
+    gutils.WriteDefaultUsings(classFileType,classFile)
+    gutils.WriteClassName(classFileType,classFile, ClassDef['Name'])
     if len(ClassDef['Fields']) > 0:
-        gutils.WriteFields(fileType,file, ClassDef['Fields'])
+        gutils.WriteFields(classFileType,classFile, ClassDef['Fields'])
 
-    gutils.WriteConstructor(fileType,file, ClassDef['Name'])
+    gutils.WriteConstructor(classFileType,classFile, ClassDef['Name'])
 
     if len(ClassDef['Properties']) > 0:
-        gutils.WriteProperties(fileType, file, ClassDef['Properties'])
+        gutils.WriteProperties(classFileType, classFile, ClassDef['Properties'])
         
     if len(ClassDef['Private Methods']) > 0:
-        gutils.WritePrivateMethods(fileType,file, ClassDef['Private Methods'])
+        gutils.WritePrivateMethods(classFileType,classFile, ClassDef['Private Methods'])
 
     if len(ClassDef['Methods']) > 0:
-        gutils.WriteMethods(fileType,file, ClassDef['Methods'])
-    file.write('}')
+        gutils.WriteMethods(classFileType,classFile, ClassDef['Methods'])
+    classFile.write('}')
+    classFile.close()
+
+
+    if vm == 'true':
+
+        ViewModelFile = open("{}ViewModel{}".format(ClassDef['Name'].replace('\n',''), classFileType), 'w')
+
+        gutils.WriteDefaultUsings(classFileType,ViewModelFile)
+        gutils.WriteClassName(classFileType,ViewModelFile, ClassDef['Name'])
+        if len(ClassDef['Fields']) > 0:
+            gutils.WriteFields(classFileType,ViewModelFile, ClassDef['Fields'])
+
+        gutils.WriteConstructor(classFileType,ViewModelFile, ClassDef['Name'])
+
+        if len(ClassDef['Properties']) > 0:
+            gutils.WriteProperties(classFileType, ViewModelFile, ClassDef['Properties'])
+            
+        if len(ClassDef['Private Methods']) > 0:
+            gutils.WritePrivateMethods(classFileType,ViewModelFile, ClassDef['Private Methods'])
+
+        if len(ClassDef['Methods']) > 0:
+            gutils.WriteMethods(classFileType,ViewModelFile, ClassDef['Methods'])
+        ViewModelFile.write('}')
+        ViewModelFile.close()
+
 
 except getopt.GetoptError:
     print("Error")
