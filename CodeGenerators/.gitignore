@@ -1,7 +1,7 @@
 *.cs
 *.txt
+*.pyc
 __pycache__
 
 
 !/CodeGenerators/Sample_ClassDef.txt
-*.pyc
